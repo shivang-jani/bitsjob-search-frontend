@@ -107,6 +107,7 @@ export function PostJobDialog({ open, onOpenChange }: PostJobDialogProps) {
         headers: {
           "Content-Type": "application/json",
           "Authorization": `Bearer ${user?.token || ""}`,
+          "Origin": "https://bitsjobsearch.vercel.app"
         },
         body: JSON.stringify({
           ...data,
