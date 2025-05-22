@@ -52,8 +52,8 @@ const Index = () => {
                 <div className="w-12 h-12 rounded-lg bg-bits-blue/20 flex items-center justify-center text-bits-blue mb-3">
                   <BriefcaseIcon className="w-6 h-6" />
                 </div>
-                <h3 className="font-heading text-lg font-medium text-white">Exclusive Jobs</h3>
-                <p className="mt-2 text-sm text-gray-300">Positions reserved exclusively for BITS graduates and students.</p>
+                <h3 className="font-heading text-lg font-medium text-white">Job Listings</h3>
+                <p className="mt-2 text-sm text-gray-300">Opportunities shared within the BITS network.</p>
               </div>
               
               <div className="glass-card p-5 rounded-xl animate-fade-in" style={{animationDelay: "0.2s"}}>
