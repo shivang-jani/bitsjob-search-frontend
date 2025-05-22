@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../components/ui/select';
 import { Input } from '../components/ui/input';
 import { Button } from '../components/ui/button';
@@ -229,9 +229,9 @@ const Jobs = () => {
           <div className="flex flex-col md:flex-row justify-between items-center">
             <p> {new Date().getFullYear()} BITS Job Portal. For BITSians, By BITSians.</p>
             <div className="mt-4 md:mt-0">
-              <a href="#" className="text-white hover:text-bits-red mr-4">About</a>
-              <a href="https://www.linkedin.com/in/shivang-jani/" className="text-white hover:text-bits-red mr-4" target="_blank" rel="noopener noreferrer">Contact</a>
-              <a href="#" className="text-white hover:text-bits-red">Privacy Policy</a>
+              <Link to="/about" className="text-white hover:text-bits-red mr-4">About</Link>
+              <a href={import.meta.env.VITE_CONTACT_ME_URL} className="text-white hover:text-bits-red mr-4" target="_blank" rel="noopener noreferrer">Contact</a>
+              <a href= {import.meta.env.VITE_GITHUB_REPO_URL} className="text-white hover:text-bits-red" target="_blank" rel="noopener noreferrer">GitHub</a>
             </div>
           </div>
         </div>

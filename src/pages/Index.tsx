@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import LoginForm from '@/components/auth/LoginForm';
 import SignUpForm from '@/components/auth/SignUpForm';
 import { BriefcaseIcon, LinkedinIcon, UsersIcon, SearchIcon } from 'lucide-react';
@@ -107,9 +107,9 @@ const Index = () => {
           <div className="flex flex-col md:flex-row justify-between items-center">
             <p className="text-gray-400"> {new Date().getFullYear()} BITS Job Portal. For BITSians, By BITSians.</p>
             <div className="mt-4 md:mt-0 flex space-x-6">
-              <a href="#" className="text-gray-400 hover:text-bits-blue smooth-transition">About</a>
-              <a href="https://www.linkedin.com/in/shivang-jani/" className="text-gray-400 hover:text-bits-blue smooth-transition" target="_blank" rel="noopener noreferrer">Contact</a>
-              <a href="#" className="text-gray-400 hover:text-bits-blue smooth-transition">Privacy Policy</a>
+              <Link to="/about" className="text-gray-400 hover:text-bits-blue smooth-transition">About</Link>
+              <a href= {import.meta.env.VITE_CONTACT_ME_URL} className="text-gray-400 hover:text-bits-blue smooth-transition" target="_blank" rel="noopener noreferrer">Contact</a>
+              <a href= {import.meta.env.VITE_GITHUB_REPO_URL} className="text-gray-400 hover:text-bits-blue smooth-transition" target="_blank" rel="noopener noreferrer">GitHub</a>
             </div>
           </div>
         </div>
