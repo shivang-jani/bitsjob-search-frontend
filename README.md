@@ -1,54 +1,63 @@
-# React + TypeScript + Vite
+👋
+About This App
+Welcome! This app is a modern, full-stack web project built to show how powerful and easy it can be to develop and deploy cloud-based applications using popular technologies. It's a blend of performance, scalability, and clean architecture.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+💡
+The Idea
+We wanted to create a real-world full-stack application using widely-used tools — not just as a demo, but as a foundation for scalable and maintainable projects.
 
-Currently, two official plugins are available:
+The goals were simple:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+✅
+Build with React for a fast, responsive UI
+✅
+Use Spring Boot for solid backend logic and REST APIs
+✅
+Store data in MongoDB Atlas, a flexible, cloud-hosted NoSQL database
+✅
+Host everything with modern deployment tools (Vercel + Render)
+🛠️
+How We Built It
+🎨
+Frontend — React + Vercel
+The frontend is built with React, styled with modern CSS, and deployed to Vercel for fast global delivery and auto-deployment on every push.
 
-## Expanding the ESLint configuration
+⚙️
+Backend — Spring Boot + Render
+The backend uses Spring Boot, exposing secure and scalable REST APIs. We host it on Render, which handles deployment directly from our GitHub repo.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+🗄️
+Database — MongoDB Atlas
+Data is stored in MongoDB Atlas, a cloud-hosted NoSQL solution that's reliable, flexible, and integrates seamlessly with Spring Boot.
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+🔄
+CI/CD — GitHub Integration
+Everything is version-controlled on GitHub, and both Vercel and Render are set to auto-deploy changes on every commit. No manual deploys needed!
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+🎯
+Why We Built It
+This project is more than a tech demo — it's a reference architecture for building real apps. Whether you're launching a startup, learning full-stack development, or experimenting with cloud tools, this setup gives you a solid starting point.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+🚀
+What's Next?
+We've laid the foundation — now it's time to build on it! Here's what's coming up:
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+📝
+Make the "Apply" button functional
+Users will soon be able to apply for jobs, triggering backend workflows and saving their submissions to the database.
+
+📩
+Send email alerts
+Automatically notify users via email when a new job matching their interests is posted.
+
+👋
+User onboarding & offboarding
+Smooth experiences for both new and departing users, with personalized welcome flows and account cleanup.
+
+📣
+Spread the word
+Share the app with more users to gather feedback, test features, and build community traction.
+
+🧪
+Advanced features
+Add filters, search, job categories, and saved jobs for a more personalized experience.
