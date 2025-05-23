@@ -8,6 +8,7 @@ export interface BackendJob {
   location: string;
   expectedSalary: number;
   linkedInUrl: string;
+  contactInfo?: string; // Added contact info field
   requirements: string;
   createdBy: string;
   createdAt: string;
@@ -24,6 +25,7 @@ export interface Job {
   location: string;
   description: string;
   requirements: string[];
+  contactInfo?: string; // Added contact info field
   postedBy: {
     name: string;
     bitsId?: string;
@@ -45,6 +47,7 @@ export const mapBackendJobToFrontend = (backendJob: BackendJob): Job => {
     requirements: backendJob.requirements 
       ? backendJob.requirements.split('\n').filter(req => req.trim() !== '')
       : [],
+    contactInfo: backendJob.contactInfo || undefined, // Map contact info field
     postedBy: {
       name: backendJob.createdBy || 'BITS Alumni',
       linkedIn: backendJob.linkedInUrl || '#'

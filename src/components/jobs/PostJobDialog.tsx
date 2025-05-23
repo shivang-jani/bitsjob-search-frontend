@@ -57,6 +57,7 @@ const formSchema = z.object({
     /^(https?:\/\/)?(www\.)?linkedin\.com\/(in|company)\/[a-zA-Z0-9_-]+\/?$/,
     { message: "Please provide a valid LinkedIn URL" }
   ),
+  contactInfo: z.string().optional(),
   requirements: z.string().optional(),
 })
 
@@ -71,6 +72,7 @@ export function PostJobDialog({ open, onOpenChange }: PostJobDialogProps) {
   const { user } = useAuth()
   
   const [otherJobTitle, setOtherJobTitle] = useState<string>("")
+  const [isOtherSelected, setIsOtherSelected] = useState<boolean>(false)
   
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -82,26 +84,45 @@ export function PostJobDialog({ open, onOpenChange }: PostJobDialogProps) {
       location: "",
       expectedSalary: undefined,
       linkedInUrl: "",
+      contactInfo: "",
       requirements: "",
     },
   })
 
   // Handle the "Other" job title selection
   const handleJobTitleChange = (value: string) => {
-    form.setValue("jobTitle", value)
-    if (value !== "Other") {
+    if (value === "Other") {
+      setIsOtherSelected(true)
+      // If "Other" is selected, keep the current custom title if it exists
+      if (!otherJobTitle) {
+        form.setValue("jobTitle", "")
+      }
+    } else {
+      setIsOtherSelected(false)
       setOtherJobTitle("")
+      form.setValue("jobTitle", value)
     }
   }
 
   // Update the form value when custom job title changes
   const handleOtherJobTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setOtherJobTitle(e.target.value)
-    form.setValue("jobTitle", e.target.value)
+    const value = e.target.value
+    setOtherJobTitle(value)
+    form.setValue("jobTitle", value)
   }
 
   const onSubmit = async (data: FormValues) => {
     try {
+      // Process data before sending to API
+      const processedData = {
+        ...data,
+        // Convert empty contactInfo to null
+        contactInfo: data.contactInfo?.trim() ? data.contactInfo : null,
+        createdBy: user?.name || "",
+        createdAt: new Date().toISOString(),
+        deleted: false,
+      };
+
       const response = await fetch(buildApiUrl("/v1/jobs"), {
         method: "POST",
         headers: {
@@ -109,12 +130,7 @@ export function PostJobDialog({ open, onOpenChange }: PostJobDialogProps) {
           "Authorization": `Bearer ${user?.token || ""}`,
           "Origin": "https://bitsjobsearch.vercel.app"
         },
-        body: JSON.stringify({
-          ...data,
-          createdBy: user?.name || "",
-          createdAt: new Date().toISOString(),
-          deleted: false,
-        }),
+        body: JSON.stringify(processedData),
       })
 
       if (!response.ok) {
@@ -216,7 +232,7 @@ export function PostJobDialog({ open, onOpenChange }: PostJobDialogProps) {
                 />
                 
                 {/* Show input field when "Other" is selected */}
-                {form.watch("jobTitle") === "Other" && (
+                {isOtherSelected && (
                   <div className="mt-2">
                     <FormItem>
                       <FormLabel>Custom Job Title*</FormLabel>
@@ -305,6 +321,26 @@ export function PostJobDialog({ open, onOpenChange }: PostJobDialogProps) {
                   </FormControl>
                   <FormDescription>
                     Enter your LinkedIn profile or company page URL.
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="contactInfo"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Contact Information</FormLabel>
+                  <FormControl>
+                    <Input 
+                      placeholder="Email, phone number, GForm links or other contact information" 
+                      {...field} 
+                    />
+                  </FormControl>
+                  <FormDescription>
+                    For Phone Numbers, GForm links etc.
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
