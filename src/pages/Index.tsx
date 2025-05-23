@@ -22,9 +22,11 @@ const Index = () => {
       <header className="py-6 px-6 sm:px-10 backdrop-blur-sm border-b border-white/10">
         <div className="container mx-auto flex justify-between items-center">
           <div className="flex items-center space-x-2">
-            <div className="h-12 w-12 rounded-full bg-gradient-to-br from-bits-blue to-bits-darkBlue flex items-center justify-center animate-pulse-glow shadow-lg">
-              <span className="text-white font-bold text-xl">B</span>
-            </div>
+            <img 
+              src="/BITS_Pilani-Logo.svg.png" 
+              alt="BITS Pilani Logo" 
+              className="h-12 w-auto shadow-lg"
+            />
             <h1 className="text-2xl md:text-3xl font-bold text-white text-glow">BITS <span className="text-bits-blue">Job Portal</span></h1>
           </div>
         </div>

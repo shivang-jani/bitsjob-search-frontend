@@ -16,9 +16,11 @@ const Navbar = () => {
     <header className="bg-white shadow-md py-4 px-6 dark:bg-gray-800 dark:border-b dark:border-gray-700">
       <div className="container mx-auto flex justify-between items-center">
         <Link to="/" className="flex items-center space-x-2">
-          <div className="h-10 w-10 rounded-full bg-bits-blue flex items-center justify-center">
-            <span className="text-white font-bold text-xl">B</span>
-          </div>
+          <img 
+            src="/BITS_Pilani-Logo.svg.png" 
+            alt="BITS Pilani Logo" 
+            className="h-10 w-auto"
+          />
           <h1 className="text-2xl font-bold text-bits-darkBlue dark:text-white">BITS Job Portal</h1>
         </Link>
         
