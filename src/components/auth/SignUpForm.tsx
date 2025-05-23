@@ -4,6 +4,7 @@ import { Button } from '../ui/button';
 import { Input } from '../ui/input';
 import { Label } from '../ui/label';
 import { useToast } from '../ui/use-toast';
+import Cookies from 'js-cookie';
 import { buildApiUrl, API_CONFIG } from '../../config/api';
 import { handleApiError } from '../../utils/errorHandler';
 
@@ -119,7 +120,13 @@ const SignUpForm = () => {
         token: data.token
       };
       
+      // Log the token for debugging
+      console.log('Token received from signup:', data.token);
+      console.log('User data being stored:', userData);
+      
+      // Store in both localStorage and cookies for consistency with login
       localStorage.setItem('user', JSON.stringify(userData));
+      Cookies.set('user', JSON.stringify(userData), { expires: 7 }); // 7 days
       
       toast({
         title: "Account created",

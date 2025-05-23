@@ -28,10 +28,20 @@ const MyListings = () => {
     const fetchUserJobs = async () => {
       try {
         if (user && user.email) {
+          // Debug: Log the token being used
+          console.log('User object in MyListings:', user);
+          console.log('Token being used for authorization in MyListings:', user.token);
+          
+          // Ensure token is not empty before making the request
+          if (!user.token) {
+            console.log('No token available in MyListings. User may need to log in again.');
+            throw new Error('Authentication token is missing. Please log in again.');
+          }
+          
           // Using the user's email to fetch their jobs
           const response = await fetch(buildApiUrl(`/v1/jobs/user/${encodeURIComponent(user.email)}`), {
             headers: {
-              'Authorization': `Bearer ${user.token || ''}`
+              'Authorization': `Bearer ${user.token}`
             }
           });
           
@@ -84,10 +94,16 @@ const MyListings = () => {
 
   const handleDeleteJob = async (jobId: string) => {
     try {
+      // Ensure token is not empty before making the request
+      if (!user?.token) {
+        console.log('No token available for delete operation. User may need to log in again.');
+        throw new Error('Authentication token is missing. Please log in again.');
+      }
+      
       const response = await fetch(buildApiUrl(`/v1/jobs/${jobId}`), {
         method: 'DELETE',
         headers: {
-          'Authorization': `Bearer ${user?.token || ''}`
+          'Authorization': `Bearer ${user.token}`
         }
       });
       

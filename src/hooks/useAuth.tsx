@@ -18,13 +18,22 @@ export const useAuth = () => {
     const cookieUser = Cookies.get('user');
     const storedUser = localStorage.getItem('user');
     
+    // Debug: Log what we're finding in storage
+    console.log('Cookie user data:', cookieUser);
+    console.log('LocalStorage user data:', storedUser);
+    
     if (cookieUser) {
-      setUser(JSON.parse(cookieUser));
+      const parsedCookieUser = JSON.parse(cookieUser);
+      console.log('Using user data from cookie with token:', parsedCookieUser.token);
+      setUser(parsedCookieUser);
     } else if (storedUser) {
       const parsedUser = JSON.parse(storedUser);
+      console.log('Using user data from localStorage with token:', parsedUser.token);
       setUser(parsedUser);
       // Also set the cookie for future sessions
       Cookies.set('user', JSON.stringify(parsedUser), { expires: 7 }); // 7 days
+    } else {
+      console.log('No user data found in cookies or localStorage');
     }
     
     setLoading(false);

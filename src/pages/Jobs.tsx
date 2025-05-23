@@ -36,9 +36,19 @@ const Jobs = () => {
     // Fetch jobs from API
     const fetchJobs = async () => {
       try {
+        // Debug: Log the token being used
+        console.log('User object:', user);
+        console.log('Token being used for authorization:', user?.token);
+        
+        // Ensure token is not empty before making the request
+        if (!user?.token) {
+          console.log('No token available. User may need to log in again.');
+          throw new Error('Authentication token is missing. Please log in again.');
+        }
+        
         const response = await fetch(buildApiUrl('/v1/jobs'), {
           headers: {
-            'Authorization': `Bearer ${user?.token || ''}`
+            'Authorization': `Bearer ${user.token}`
           }
         });
         if (!response.ok) {
